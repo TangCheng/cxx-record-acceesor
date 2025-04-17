@@ -1,0 +1,4 @@
+cmake-build-*
+build
+conan_provider.cmake
+.idea
