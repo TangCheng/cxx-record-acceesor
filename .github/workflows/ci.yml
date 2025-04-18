@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: CMake configure
+        run:
+          cmake --preset=release
+
+      - name: build
+        run:
+          cmake --build --preset=release
+
+      - name: test
+        run:
+          ctest --preset=release
+
