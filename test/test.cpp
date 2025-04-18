@@ -5,8 +5,17 @@
 #include "record/register_macro.h"
 
 // 注册时保持与类型的声明在同一命名空间，避免冲突
-REGISTER_STRUCT(Address, postCode, street);
-REGISTER_STRUCT(Company, addr, hookFunc, name, anything);
+BEGIN_REGISTER_STRUCT(Address){
+    FIELD_ENTRY(Address, postCode),
+    FIELD_ENTRY(Address, street),
+} END_REGISTER_STRUCT();
+
+BEGIN_REGISTER_STRUCT(Company){
+    FIELD_ENTRY(Company, addr),
+    FIELD_ENTRY(Company, hookFunc),
+    FIELD_ENTRY(Company, name),
+    FIELD_ENTRY(Company, anything),
+} END_REGISTER_STRUCT();
 
 using namespace record;
 
