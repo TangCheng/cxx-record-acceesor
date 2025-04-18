@@ -1,4 +1,4 @@
-#include <GMock/gmock.h>
+#include <gmock/gmock.h>
 
 #include "data.h"
 #include "record/getter.h"
