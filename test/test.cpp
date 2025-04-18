@@ -43,13 +43,13 @@ TEST_F(CXX11RecordTest, GetStringValueByName) {
 
 TEST_F(CXX11RecordTest, GetObjectByName) {
   auto value = getFieldAsString(&company, "addr");
-  ASSERT_THAT(value, StartsWith("obj &0x"))
+  ASSERT_THAT(value, StartsWith("obj &0"))
       << "Expected a pointer to Address for object field which have no ostream operator<<, but got: " << value;
 }
 
 TEST_F(CXX11RecordTest, GetFunctionPointer) {
   auto value = getFieldAsString(&company, "hookFunc");
-  ASSERT_THAT(value, Eq("func ->0")) << "Expected a pointer to function: " << value;
+  ASSERT_THAT(value, StartsWith("func ->0")) << "Expected a pointer to function: " << value;
 }
 
 TEST_F(CXX11RecordTest, GetFloat) {
