@@ -53,6 +53,17 @@ std::string asString_impl(T const& value, std::true_type /* tag: indicates suppo
   return ss.str();
 }
 
+template <typename T, std::size_t N>
+std::string asString_impl(T (*value)[N], std::true_type /* tag: indicates support */) {
+  std::stringstream ss;
+  for (T v : (*value)) {
+    ss << v << ",";
+  }
+  std::string& str = ss.str();
+  str.pop_back();
+  return str;
+}
+
 template <std::size_t N>
 std::string asString_impl(char (*value)[N], std::true_type /* tag: indicates support */) {
   return {reinterpret_cast<const char*>(value)};

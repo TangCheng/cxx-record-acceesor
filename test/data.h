@@ -13,6 +13,7 @@ struct Company {
   void (*hookFunc)(void*);
   void* hookData;
   float anything;
+  int (*indexOfDepartment)[6];
 };
 
 

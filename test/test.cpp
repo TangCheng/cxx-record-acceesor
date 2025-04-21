@@ -15,6 +15,7 @@ BEGIN_REGISTER_STRUCT(Company){
     FIELD_ENTRY(Company, hookFunc),
     FIELD_ENTRY(Company, name),
     FIELD_ENTRY(Company, anything),
+    FIELD_ENTRY(Company, indexOfDepartment),
 } END_REGISTER_STRUCT();
 
 using namespace record;
@@ -23,6 +24,7 @@ class CXX11RecordTest : public ::testing::Test {
  protected:
   char street[32] = "123 Main St";
   char name[16] = "Tech Corp";
+  int indexOfDepartment[6] = {1, 2, 3, 4, 5, 6};
   Company company;
 
  public:
@@ -31,6 +33,7 @@ class CXX11RecordTest : public ::testing::Test {
     company.addr.postCode = 12345;
     company.name = &name;
     company.hookFunc = nullptr;
+    company.indexOfDepartment = &indexOfDepartment;
   }
 };
 
@@ -65,6 +68,11 @@ TEST_F(CXX11RecordTest, GetFloat) {
   company.anything = 3.14;
   auto value = getFieldAsString(&company, "anything");
   ASSERT_THAT(value, StartsWith("3.14"));
+}
+
+TEST_F(CXX11RecordTest, GetIntArrayByName) {
+  auto value = getFieldAsString(&company, "indexOfDepartment");
+  ASSERT_THAT(value, Eq("1,2,3,4,5,6"));
 }
 
 TEST_F(CXX11RecordTest, GetUnregField) {
