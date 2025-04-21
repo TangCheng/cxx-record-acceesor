@@ -67,7 +67,7 @@ TEST_F(CXX11RecordTest, GetFunctionPointer) {
 TEST_F(CXX11RecordTest, GetFloat) {
   company.anything = 3.14;
   auto value = getFieldAsString(&company, "anything");
-  ASSERT_THAT(value, StartsWith("3.14"));
+  ASSERT_THAT(value, Eq("3.14"));
 }
 
 TEST_F(CXX11RecordTest, GetIntArrayByName) {
